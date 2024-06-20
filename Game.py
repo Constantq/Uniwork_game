@@ -72,7 +72,7 @@ playerrect = player.get_rect(center=(width //2, height-120))
 
 
 
-clock = pygame.time.Clock()  # Добавим объект Clock для управления частотой кадров
+clock = pygame.time.Clock()  # Let's add a Clock object to control the frame rate
 
 game_running = False
 
@@ -132,7 +132,7 @@ def show_countdown():
         text_rect = text.get_rect(center=(width // 2, height // 2))
         screen.blit(text, text_rect)
         pygame.display.flip()
-        pygame.time.delay(1000)  # Задержка в 1 секунду
+        pygame.time.delay(1000)  # 1 second delay
 def start_game():
     global game_running
     game_running = True
@@ -154,7 +154,7 @@ def main_game(hooprect, playerrect):
  while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False  # Выходим из цикла, если нажата кнопка закрытия окна
+            running = False  # Exit the loop if the window close button is pressed
             pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
@@ -202,9 +202,7 @@ def main_game(hooprect, playerrect):
     hooprect = hooprect.move(speed_hoop)
     ballrect = ballrect.move(speed_ball)
     
-    """ if ballrect.left < 0 or ballrect.right > width:
-        speed[0] = -speed[0]
-        """
+   
     if ballrect.top < 0 or isHit is True:
         isThrown = False
     elif ballrect.top < 10:
@@ -216,19 +214,13 @@ def main_game(hooprect, playerrect):
             speed_hoop[1] = -speed_hoop[1]  
 
     hoop_target_area = pygame.Rect(hooprect.left+90, hooprect.top+72, hooprect.width-180, hooprect.height -180)
-    #hoop_area = pygame.Rect(hooprect.left+30, hooprect.top+25, hooprect.width-58, hooprect.height-100)
+   
     ball_area = pygame.Rect(ballrect.left+30, ballrect.top+18, ballrect.width-60, ballrect.height-50)
-    #player_area = pygame.Rect(playerrect.left+58, playerrect.top+10, playerrect.width-108, playerrect.height-10)
-    
-    ##player_pos = pygame.math.Vector2(player_area.center)
-    
-    
-
-   # distance = hoop_pos.distance_to(player_pos)
+ 
     
 
     if ball_area.colliderect(hoop_target_area):
-        if not isHit:  # Проверяем, не было ли уже попадания
+        if not isHit:  # Checking to see if there has already been a hit
           isHit = True
           if isUp is False:
             score += 1
@@ -294,26 +286,26 @@ custom_theme = pygame_menu.themes.Theme(
     widget_font_size=45,
     widget_font=pygame_menu.font.FONT_8BIT,
     widget_font_color=black,
-    widget_selection_effect = pygame_menu.widgets.HighlightSelection(border_width=0),  # Убираем прямоугольное выделение
+    widget_selection_effect = pygame_menu.widgets.HighlightSelection(border_width=0),  # Removing the rectangular selection
 )
 
 
 
-# Create the menu with the custom theme
+
 menu = pygame_menu.Menu('', width, height, theme=custom_theme)
 
-# Rest of your code...
+
 
 
 
         
 
 
-#menu.add.text_input('Name :', default='John Doe')
+
 menu.add.button('Play', start_game)
 menu.add.button('Quit', pygame_menu.events.EXIT)
 
-#submenu = pygame_menu.Menu('Name', width, height,theme=custom_theme)
+
 
 
 while True:
